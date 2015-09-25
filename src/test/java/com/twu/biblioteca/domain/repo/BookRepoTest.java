@@ -11,7 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class BookRepoTest {
 
@@ -54,5 +56,11 @@ public class BookRepoTest {
         assertThat(book.getTitle(), is("Test Driven Development: By Example"));
         assertThat(book.getAuthor(), is("Kent Beck"));
         assertThat(book.getPublishedYear(), is(formatter.parse("2002-11-18")));
+    }
+
+    @Test
+    public void should_judge_correct_when_call_is_book_exist() {
+        assertTrue(bookRepo.isBookExist(2));
+        assertFalse(bookRepo.isBookExist(8));
     }
 }

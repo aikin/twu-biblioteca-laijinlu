@@ -24,6 +24,10 @@ public class BookRepo {
         return this.listOfBooks.get(bookId);
     }
 
+    public boolean isBookExist(int bookId) {
+        return this.listOfBooks.containsKey(bookId);
+    }
+
     private void initBooks() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
