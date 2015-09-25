@@ -20,6 +20,9 @@ public class BookRepo {
         return listOfBooks;
     }
 
+    public Book getBookById(int i) {
+        return this.listOfBooks.get(i);
+    }
 
     private void initBooks() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

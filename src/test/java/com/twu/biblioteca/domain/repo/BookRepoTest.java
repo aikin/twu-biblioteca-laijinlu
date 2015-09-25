@@ -45,4 +45,14 @@ public class BookRepoTest {
         assertThat(listOfBooks.get(4).getAuthor(), is("Dustin Boswell & Trevor Foucher"));
         assertThat(listOfBooks.get(4).getPublishedYear(), is(formatter.parse("2011-12-02")));
     }
+
+    @Test
+    public void should_get_book_by_id() throws ParseException {
+        Book book = bookRepo.getBookById(3);
+
+        assertThat(book.getId(), is(3));
+        assertThat(book.getTitle(), is("Test Driven Development: By Example"));
+        assertThat(book.getAuthor(), is("Kent Beck"));
+        assertThat(book.getPublishedYear(), is(formatter.parse("2002-11-18")));
+    }
 }
