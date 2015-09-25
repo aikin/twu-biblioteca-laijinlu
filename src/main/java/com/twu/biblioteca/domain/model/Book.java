@@ -5,23 +5,23 @@ import java.util.Date;
 
 public class Book {
 
-    private int id;
+    private String id;
     private String title;
     private String author;
     private Date publishedYear;
 
-    public Book(int id, String title, String author, Date publishedYear) {
+    public Book(String id, String title, String author, Date publishedYear) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publishedYear = publishedYear;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
