@@ -11,6 +11,7 @@ import java.util.Map;
 public class BookRepo {
 
     private final Map<String, Book> listOfBooks = new HashMap<>();
+    private final Map<String, String> checkedOutBooks = new HashMap<>();
 
     public BookRepo() {
         this.initBooks();
@@ -24,8 +25,24 @@ public class BookRepo {
         return this.listOfBooks.get(bookId);
     }
 
+    public Map<String, String> getCheckedOutBooks() {
+        return this.checkedOutBooks;
+    }
+
+    public void addCheckedOutBook(String bookId, String customerId) {
+        this.checkedOutBooks.put(bookId, customerId);
+    }
+
     public boolean isBookExist(String bookId) {
         return this.listOfBooks.containsKey(bookId);
+    }
+
+    public boolean isBookCheckedOut(String bookId) {
+        return this.checkedOutBooks.containsKey(bookId);
+    }
+
+    public void removeCheckedOutBook(String bookId) {
+        this.checkedOutBooks.remove(bookId);
     }
 
     private void initBooks() {
