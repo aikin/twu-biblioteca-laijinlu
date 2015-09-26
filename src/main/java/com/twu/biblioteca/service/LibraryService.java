@@ -13,6 +13,8 @@ public class LibraryService {
     private static final String CUSTOMER_ID = "C-01";
     private static final String SUCCESS_CHECKOUT_BOOK_MESSAGE = "Thank you! Enjoy the book.";
     private static final String FAILURE_CHECKOUT_BOOK_MESSAGE = "That book is not available.";
+    private static final String SUCCESS_RETURN_BOOK_MESSAGE = "Thank you for returning the book.";
+    private static final String FAILURE_RETURN_BOOK_MESSAGE = "That is not a valid book to return.";
 
     private final BookRepo bookRepo;
 
@@ -42,5 +44,16 @@ public class LibraryService {
             return;
         }
         System.out.printf(FAILURE_CHECKOUT_BOOK_MESSAGE);
+    }
+
+    public void returnBook(String bookId) {
+        Boolean isCanReturnBook = bookRepo.isBookExist(bookId)
+            && bookRepo.isBookCheckedOutForCurrentCustomer(bookId, CUSTOMER_ID);
+        if (isCanReturnBook) {
+            bookRepo.removeCheckedOutBook(bookId);
+            System.out.printf(SUCCESS_RETURN_BOOK_MESSAGE);
+            return;
+        }
+        System.out.printf(FAILURE_RETURN_BOOK_MESSAGE);
     }
 }

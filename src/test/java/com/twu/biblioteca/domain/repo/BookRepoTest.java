@@ -84,6 +84,7 @@ public class BookRepoTest {
         bookRepo.addCheckedOutBook("B-01", "C-01");
 
         assertTrue(bookRepo.isBookCheckedOut("B-01"));
+        assertFalse(bookRepo.isBookCheckedOutForCurrentCustomer("B-01", "C-02"));
     }
 
     @Test
