@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 public class LibraryServiceTest {
@@ -65,6 +66,7 @@ public class LibraryServiceTest {
         assertThat(booksCanCheckout.size(), is(5));
         assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
         assertThat(outContent.toString(), is("Thank you! Enjoy the book."));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
 
     @Test
@@ -75,6 +77,7 @@ public class LibraryServiceTest {
         assertThat(booksCanCheckout.size(), is(6));
         assertThat(booksCanCheckout.get(2).getId(), is("B-03"));
         assertThat(outContent.toString(), is("That book is not available."));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(0));
     }
 
     @Test
@@ -86,6 +89,7 @@ public class LibraryServiceTest {
         assertThat(booksCanCheckout.size(), is(5));
         assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
         assertThat(outContent.toString(), is("That book is not available."));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
-
 }
