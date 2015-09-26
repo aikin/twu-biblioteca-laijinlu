@@ -3,7 +3,7 @@ package com.twu.biblioteca.domain.model;
 
 import java.util.Date;
 
-public class Book {
+public class Book implements Comparable {
 
     private String id;
     private String title;
@@ -47,5 +47,11 @@ public class Book {
 
     public void setPublishedYear(Date publishedYear) {
         this.publishedYear = publishedYear;
+    }
+
+    @Override
+    public int compareTo(Object object) {
+        Book book = (Book) object;
+        return this.getId().compareTo(book.getId());
     }
 }

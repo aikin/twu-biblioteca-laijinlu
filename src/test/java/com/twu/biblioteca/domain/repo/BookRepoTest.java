@@ -35,7 +35,7 @@ public class BookRepoTest {
 
     @Test
     public void should_can_get_list_of_books() throws ParseException {
-        Map<String, Book> listOfBooks = bookRepo.getListOfOriginalBooks();
+        Map<String, Book> listOfBooks = bookRepo.getOriginalBooks();
 
         assertThat(listOfBooks.size(), is(6));
         assertThat(listOfBooks.get("B-01").getId(), is("B-01"));
