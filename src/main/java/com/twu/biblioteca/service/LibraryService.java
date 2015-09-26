@@ -10,9 +10,11 @@ import java.util.Map;
 
 public class LibraryService {
 
-    private BookRepo bookRepo;
     private static final String CUSTOMER_ID = "C-01";
     private static final String SUCCESS_CHECKOUT_BOOK_MESSAGE = "Thank you! Enjoy the book.";
+    private static final String FAILURE_CHECKOUT_BOOK_MESSAGE = "That book is not available.";
+
+    private final BookRepo bookRepo;
 
     public LibraryService(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
@@ -33,9 +35,12 @@ public class LibraryService {
     }
 
     public void checkoutBook(String bookId) {
-        if (bookRepo.isBookExist(bookId) && !bookRepo.isBookCheckedOut(bookId)) {
+        Boolean isCanCheckoutBook = bookRepo.isBookExist(bookId) && !bookRepo.isBookCheckedOut(bookId);
+        if (isCanCheckoutBook) {
             bookRepo.addCheckedOutBook(bookId, CUSTOMER_ID);
             System.out.printf(SUCCESS_CHECKOUT_BOOK_MESSAGE);
+            return;
         }
+        System.out.printf(FAILURE_CHECKOUT_BOOK_MESSAGE);
     }
 }

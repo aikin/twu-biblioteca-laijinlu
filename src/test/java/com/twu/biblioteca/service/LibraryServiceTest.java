@@ -21,6 +21,7 @@ public class LibraryServiceTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
+    private BookRepo bookRepo;
     private LibraryService libraryService;
     private SimpleDateFormat formatter;
 
@@ -30,7 +31,7 @@ public class LibraryServiceTest {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
 
-        BookRepo bookRepo = new BookRepo();
+        bookRepo = new BookRepo();
         libraryService = new LibraryService(bookRepo);
         formatter = new SimpleDateFormat("yyyy-MM-dd");
     }
@@ -40,6 +41,7 @@ public class LibraryServiceTest {
         System.setOut(null);
         System.setErr(null);
 
+        bookRepo = null;
         libraryService = null;
         formatter = null;
     }
@@ -56,13 +58,34 @@ public class LibraryServiceTest {
     }
 
     @Test
-    public void should_checkout_book_success_when_book_is_can_be_checked_out() throws ParseException {
+    public void should_checkout_book_success_when_book_is_can_be_checked_out() {
         libraryService.checkoutBook("B-03");
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
         assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
         assertThat(outContent.toString(), is("Thank you! Enjoy the book."));
+    }
+
+    @Test
+    public void should_checkout_book_failure_when_book_is_not_exist() {
+        libraryService.checkoutBook("nonexistence");
+        List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(6));
+        assertThat(booksCanCheckout.get(2).getId(), is("B-03"));
+        assertThat(outContent.toString(), is("That book is not available."));
+    }
+
+    @Test
+    public void should_checkout_book_failure_when_book_is_exist_in_checked_out_books() {
+        bookRepo.addCheckedOutBook("B-03", "C-01");
+        List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
+        libraryService.checkoutBook("B-03");
+
+        assertThat(booksCanCheckout.size(), is(5));
+        assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
+        assertThat(outContent.toString(), is("That book is not available."));
     }
 
 }
