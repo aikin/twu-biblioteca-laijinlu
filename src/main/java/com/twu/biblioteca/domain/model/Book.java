@@ -1,6 +1,7 @@
 package com.twu.biblioteca.domain.model;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Book implements Comparable {
@@ -53,5 +54,15 @@ public class Book implements Comparable {
     public int compareTo(Object object) {
         Book book = (Book) object;
         return this.getId().compareTo(book.getId());
+    }
+
+    public static String generateColumnHeader() {
+        return "ID         Title         Author     Published Year";
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return id + ",   " + title + ",  " + author + ",  " +  formatter.format(publishedYear) + "    ";
     }
 }

@@ -1,7 +1,12 @@
 package com.twu.biblioteca.helper;
 
 
-import java.util.Scanner;
+import com.twu.biblioteca.domain.model.Book;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
 import static java.lang.System.out;
 
@@ -12,18 +17,40 @@ public class InteractionHelper {
     }
 
     public void showMenu() {
-        out.println("       1 - List books\n       2 - Checkout a book\n       3 - Quit");
+        out.println("       1 - List books\n" +
+                    "       2 - Checkout a book\n" +
+                    "       3 - Return a book\n" +
+                    "       4 - Quit");
+    }
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (scanner.hasNextLine()) {
-                try {
-                    out.println(scanner.nextLine());
-                } catch (Exception e) {
-                    out.println(e.getMessage());
-                }
+    public int getChooseOption() {
+        String input = readUserInputWithPrompt("\nPlease choose an option: ");
+        if (input != null) {
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                return Double.MAX_EXPONENT;
             }
         }
+        return Double.MAX_EXPONENT;
+    }
+
+    public String readUserInputWithPrompt(String prompt) {
+        promptMessage(prompt);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
+    public void showBooksCanCheckout(List<Book> books) {
+        promptMessage(Book.generateColumnHeader());
+        for (Book book : books) {
+            promptMessage(book.toString());
+        }
+    }
 }

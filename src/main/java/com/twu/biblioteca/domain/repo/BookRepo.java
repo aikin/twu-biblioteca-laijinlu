@@ -58,7 +58,7 @@ public class BookRepo {
             this.originalBooks.put("B-03", new Book("B-03", "Test Driven Development: By Example", "Kent Beck", formatter.parse("2002-11-18")));
             this.originalBooks.put("B-04", new Book("B-04", "The Art of Readable Code", "Dustin Boswell & Trevor Foucher", formatter.parse("2011-12-02")));
             this.originalBooks.put("B-05", new Book("B-05", "Patterns of Enterprise Application Architecture", "Martin Fowler", formatter.parse("2002-11-15")));
-            this.originalBooks.put("B-06", new Book("B-06", "Extreme Programming Explained: Embrace Chang", "Kent Beck & Cynthia Andres ", formatter.parse("2011-09-01")));
+            this.originalBooks.put("B-06", new Book("B-06", "Extreme Programming Explained: Embrace Chang", "Kent Beck & Cynthia Andres", formatter.parse("2011-09-01")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
