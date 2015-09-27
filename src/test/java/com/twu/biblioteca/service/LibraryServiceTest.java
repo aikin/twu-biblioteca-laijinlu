@@ -2,6 +2,7 @@ package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.domain.model.Book;
 import com.twu.biblioteca.domain.repo.BookRepo;
+import com.twu.biblioteca.helper.InteractionHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +30,7 @@ public class LibraryServiceTest {
     private static final String FAILURE_RETURN_BOOK_MESSAGE = "That is not a valid book to return.";
 
     private BookRepo bookRepo;
+    private InteractionHelper interactionHelper;
     private LibraryService libraryService;
     private SimpleDateFormat formatter;
 
@@ -39,7 +41,8 @@ public class LibraryServiceTest {
         System.setErr(new PrintStream(errContent));
 
         bookRepo = new BookRepo();
-        libraryService = new LibraryService(bookRepo);
+        interactionHelper = new InteractionHelper();
+        libraryService = new LibraryService(bookRepo, interactionHelper);
         formatter = new SimpleDateFormat("yyyy-MM-dd");
     }
 
@@ -71,7 +74,7 @@ public class LibraryServiceTest {
 
         assertThat(booksCanCheckout.size(), is(5));
         assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
-        assertThat(outContent.toString(), is(SUCCESS_CHECKOUT_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(SUCCESS_CHECKOUT_BOOK_MESSAGE + "\n"));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
 
@@ -82,7 +85,7 @@ public class LibraryServiceTest {
 
         assertThat(booksCanCheckout.size(), is(6));
         assertThat(booksCanCheckout.get(2).getId(), is("B-03"));
-        assertThat(outContent.toString(), is(FAILURE_CHECKOUT_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(FAILURE_CHECKOUT_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(0));
     }
 
@@ -94,7 +97,7 @@ public class LibraryServiceTest {
 
         assertThat(booksCanCheckout.size(), is(5));
         assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
-        assertThat(outContent.toString(), is(FAILURE_CHECKOUT_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(FAILURE_CHECKOUT_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
@@ -107,7 +110,7 @@ public class LibraryServiceTest {
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
-        assertThat(outContent.toString(), is(SUCCESS_RETURN_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(SUCCESS_RETURN_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-04"));
     }
@@ -120,7 +123,7 @@ public class LibraryServiceTest {
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
-        assertThat(outContent.toString(), is(SUCCESS_RETURN_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(SUCCESS_RETURN_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
@@ -133,7 +136,7 @@ public class LibraryServiceTest {
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(4));
-        assertThat(outContent.toString(), is(FAILURE_RETURN_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(FAILURE_RETURN_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(2));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-04"));
@@ -147,7 +150,7 @@ public class LibraryServiceTest {
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
-        assertThat(outContent.toString(), is(FAILURE_RETURN_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(FAILURE_RETURN_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
@@ -159,7 +162,7 @@ public class LibraryServiceTest {
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
-        assertThat(outContent.toString(), is(FAILURE_RETURN_BOOK_MESSAGE));
+        assertThat(outContent.toString(), is(FAILURE_RETURN_BOOK_MESSAGE + "\n"));
         assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
