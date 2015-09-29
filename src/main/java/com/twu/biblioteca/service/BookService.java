@@ -36,12 +36,22 @@ public class BookService {
         return books;
     }
 
-    public String checkoutBook(String bookId, String customerId) {
+    public String checkoutBook(String bookId, String userId) {
         Boolean isCanCheckoutBook = bookRepo.isBookExist(bookId) && !bookRepo.isBookCheckedOut(bookId);
         if (isCanCheckoutBook) {
-            bookRepo.addCheckedOutBook(bookId, customerId);
+            bookRepo.addCheckedOutBook(bookId, userId);
             return SUCCESS_CHECKOUT_BOOK_MESSAGE;
         }
         return FAILURE_CHECKOUT_BOOK_MESSAGE;
+    }
+
+    public String returnBook(String bookId, String userId) {
+        Boolean isCanReturnBook = bookRepo.isBookExist(bookId)
+            && bookRepo.isBookCheckedOutForCurrentCustomer(bookId, userId);
+        if (isCanReturnBook) {
+            bookRepo.removeCheckedOutBook(bookId);
+            return SUCCESS_RETURN_BOOK_MESSAGE;
+        }
+        return FAILURE_RETURN_BOOK_MESSAGE;
     }
 }

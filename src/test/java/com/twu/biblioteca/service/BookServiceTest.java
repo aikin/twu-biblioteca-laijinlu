@@ -56,4 +56,93 @@ public class BookServiceTest extends TestFixtures {
         assertThat(message, is(SUCCESS_CHECKOUT_BOOK_MESSAGE));
         assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
     }
+
+    @Test
+    public void should_checkout_book_failure_when_book_is_not_exist() {
+        String message = bookService.checkoutBook("nonexistence", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(6));
+        assertThat(booksCanCheckout.get(2).getId(), is("B-03"));
+        assertThat(message, is(FAILURE_CHECKOUT_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(0));
+    }
+
+    @Test
+    public void should_checkout_book_failure_when_book_is_exist_in_checked_out_books() {
+        bookRepo.addCheckedOutBook("B-03", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+        String message = bookService.checkoutBook("B-03", "C-01");
+
+        assertThat(booksCanCheckout.size(), is(5));
+        assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
+        assertThat(message, is(FAILURE_CHECKOUT_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
+    }
+
+    @Test
+    public void should_return_book_success_when_book_is_can_be_return() {
+        bookRepo.addCheckedOutBook("B-03", "C-01");
+        bookRepo.addCheckedOutBook("B-04", "C-01");
+        String message = bookService.returnBook("B-03", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(5));
+        assertThat(message, is(SUCCESS_RETURN_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-04"));
+    }
+
+    @Test
+    public void should_return_book_success_when_book_is_checked_out_by_current_customer() {
+        bookRepo.addCheckedOutBook("B-03", "C-02");
+        bookRepo.addCheckedOutBook("B-04", "C-01");
+        String message = bookService.returnBook("B-04", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(5));
+        assertThat(message, is(SUCCESS_RETURN_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
+    }
+
+    @Test
+    public void should_return_book_failure_when_book_is_not_checked_out_by_current_customer() {
+        bookRepo.addCheckedOutBook("B-03", "C-02");
+        bookRepo.addCheckedOutBook("B-04", "C-01");
+        String message = bookService.returnBook("B-03", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(4));
+        assertThat(message, is(FAILURE_RETURN_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(2));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-04"));
+    }
+
+
+    @Test
+    public void should_return_book_failure_when_book_is_not_exist() {
+        bookRepo.addCheckedOutBook("B-03", "C-01");
+        String message = bookService.returnBook("B-08", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(5));
+        assertThat(message, is(FAILURE_RETURN_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
+    }
+
+    @Test
+    public void should_return_book_failure_when_book_is_not_checked_out() {
+        bookRepo.addCheckedOutBook("B-03", "C-01");
+        String message = bookService.returnBook("B-04", "C-01");
+        List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
+
+        assertThat(booksCanCheckout.size(), is(5));
+        assertThat(message, is(FAILURE_RETURN_BOOK_MESSAGE));
+        assertThat(bookRepo.getCheckedOutBooks().size(), is(1));
+        assertTrue(bookRepo.getCheckedOutBooks().containsKey("B-03"));
+    }
 }
