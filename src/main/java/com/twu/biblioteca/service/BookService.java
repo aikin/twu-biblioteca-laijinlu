@@ -35,4 +35,13 @@ public class BookService {
         Collections.sort(books);
         return books;
     }
+
+    public String checkoutBook(String bookId, String customerId) {
+        Boolean isCanCheckoutBook = bookRepo.isBookExist(bookId) && !bookRepo.isBookCheckedOut(bookId);
+        if (isCanCheckoutBook) {
+            bookRepo.addCheckedOutBook(bookId, customerId);
+            return SUCCESS_CHECKOUT_BOOK_MESSAGE;
+        }
+        return FAILURE_CHECKOUT_BOOK_MESSAGE;
+    }
 }

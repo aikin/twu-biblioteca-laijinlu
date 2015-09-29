@@ -81,13 +81,8 @@ public class LibraryService {
     }
 
     public void checkoutBook(String bookId) {
-        Boolean isCanCheckoutBook = bookRepo.isBookExist(bookId) && !bookRepo.isBookCheckedOut(bookId);
-        if (isCanCheckoutBook) {
-            bookRepo.addCheckedOutBook(bookId, CUSTOMER_ID);
-            interactionHelper.promptMessage(SUCCESS_CHECKOUT_BOOK_MESSAGE);
-            return;
-        }
-        interactionHelper.promptMessage(FAILURE_CHECKOUT_BOOK_MESSAGE);
+        String message = bookService.checkoutBook(bookId, CUSTOMER_ID);
+        interactionHelper.promptMessage(message);
     }
 
     public void returnBook(String bookId) {
