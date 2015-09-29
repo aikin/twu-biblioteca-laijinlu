@@ -2,6 +2,7 @@ package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.domain.model.Book;
 import com.twu.biblioteca.domain.repo.BookRepo;
+import com.twu.biblioteca.domain.util.TestFixtures;
 import com.twu.biblioteca.helper.InteractionHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -18,19 +19,12 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 
-public class LibraryServiceTest {
+public class LibraryServiceTest extends TestFixtures {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
-    private static final String CUSTOMER_ID = "C-01";
-    private static final String SUCCESS_CHECKOUT_BOOK_MESSAGE = "Thank you! Enjoy the book.";
-    private static final String FAILURE_CHECKOUT_BOOK_MESSAGE = "That book is not available.";
-    private static final String SUCCESS_RETURN_BOOK_MESSAGE = "Thank you for returning the book.";
-    private static final String FAILURE_RETURN_BOOK_MESSAGE = "That is not a valid book to return.";
-
     private BookRepo bookRepo;
-    private InteractionHelper interactionHelper;
     private LibraryService libraryService;
     private SimpleDateFormat formatter;
 
@@ -41,7 +35,7 @@ public class LibraryServiceTest {
         System.setErr(new PrintStream(errContent));
 
         bookRepo = new BookRepo();
-        interactionHelper = new InteractionHelper();
+        InteractionHelper interactionHelper = new InteractionHelper();
         BookService bookService = new BookService(bookRepo);
         libraryService = new LibraryService(bookService, interactionHelper);
         formatter = new SimpleDateFormat("yyyy-MM-dd");
