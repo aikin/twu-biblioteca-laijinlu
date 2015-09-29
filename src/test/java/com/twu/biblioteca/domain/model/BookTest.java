@@ -47,4 +47,11 @@ public class BookTest {
         assertThat(book.getAuthor(), is("author2"));
         assertThat(book.getPublishedYear(), is(updatedPublishedDate));
     }
+
+    @Test
+    public void should_can_compare_by_id() {
+        Book lessBook = new Book("B-02", "title2", "author2", currentDate);
+
+        assertThat(book.compareTo(lessBook), is(-1));
+    }
 }

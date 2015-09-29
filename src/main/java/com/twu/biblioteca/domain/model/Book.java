@@ -4,7 +4,7 @@ package com.twu.biblioteca.domain.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Book implements Comparable {
+public class Book implements Comparable<Book> {
 
     private String id;
     private String title;
@@ -51,8 +51,7 @@ public class Book implements Comparable {
     }
 
     @Override
-    public int compareTo(Object object) {
-        Book book = (Book) object;
+    public int compareTo(Book book) {
         return this.getId().compareTo(book.getId());
     }
 

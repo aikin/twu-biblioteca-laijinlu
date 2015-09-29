@@ -50,4 +50,11 @@ public class MovieTest {
         assertThat(movie.getYear(), is(updatedPublishedDate));
         assertThat(movie.getRating(), is("unrated"));
     }
+
+    @Test
+    public void should_can_compare_by_id() {
+        Movie lessMovie = new Movie("M-02", "movie2", "director2", currentDate, "10");
+
+        assertThat(movie.compareTo(lessMovie), is(-1));
+    }
 }

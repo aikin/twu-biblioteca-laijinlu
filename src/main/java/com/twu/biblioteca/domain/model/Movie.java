@@ -3,7 +3,7 @@ package com.twu.biblioteca.domain.model;
 
 import java.util.Date;
 
-public class Movie  {
+public class Movie implements Comparable<Movie> {
 
     private String id;
     private String name;
@@ -57,5 +57,10 @@ public class Movie  {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public int compareTo(Movie movie) {
+        return this.getId().compareTo(movie.getId());
     }
 }
