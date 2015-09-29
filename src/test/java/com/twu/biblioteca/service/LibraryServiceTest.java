@@ -43,7 +43,7 @@ public class LibraryServiceTest {
         bookRepo = new BookRepo();
         interactionHelper = new InteractionHelper();
         BookService bookService = new BookService(bookRepo);
-        libraryService = new LibraryService(bookService, bookRepo, interactionHelper);
+        libraryService = new LibraryService(bookService, interactionHelper);
         formatter = new SimpleDateFormat("yyyy-MM-dd");
     }
 

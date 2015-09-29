@@ -1,7 +1,6 @@
 package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.domain.model.Book;
-import com.twu.biblioteca.domain.repo.BookRepo;
 import com.twu.biblioteca.helper.InteractionHelper;
 
 import java.util.List;
@@ -11,21 +10,15 @@ public class LibraryService {
     private static final String CUSTOMER_ID = "C-01";
     private static final String WELCOME_MESSAGE = "\n----------------Welcome to Biblioteca!----------------\n";
     private static final String QUIT_MESSAGE = "\n----------------Thank you for use the Biblioteca!----------------\n";
-    private static final String SUCCESS_CHECKOUT_BOOK_MESSAGE = "Thank you! Enjoy the book.";
-    private static final String FAILURE_CHECKOUT_BOOK_MESSAGE = "That book is not available.";
-    private static final String SUCCESS_RETURN_BOOK_MESSAGE = "Thank you for returning the book.";
-    private static final String FAILURE_RETURN_BOOK_MESSAGE = "That is not a valid book to return.";
     private static final String INVALID_MENU_OPTION = "Select a valid option!";
     private static final String RELAUNCH_MESSAGE = "\n----------------Press enter to relaunch!----------------";
 
     private final BookService bookService;
-    private final BookRepo bookRepo;
     private final InteractionHelper interactionHelper;
 
 
-    public LibraryService(BookService bookService, final BookRepo bookRepo, final InteractionHelper interactionHelper) {
+    public LibraryService(final BookService bookService, final InteractionHelper interactionHelper) {
         this.bookService = bookService;
-        this.bookRepo = bookRepo;
         this.interactionHelper = interactionHelper;
     }
 
@@ -86,13 +79,7 @@ public class LibraryService {
     }
 
     public void returnBook(String bookId) {
-        Boolean isCanReturnBook = bookRepo.isBookExist(bookId)
-            && bookRepo.isBookCheckedOutForCurrentCustomer(bookId, CUSTOMER_ID);
-        if (isCanReturnBook) {
-            bookRepo.removeCheckedOutBook(bookId);
-            interactionHelper.promptMessage(SUCCESS_RETURN_BOOK_MESSAGE);
-            return;
-        }
-        interactionHelper.promptMessage(FAILURE_RETURN_BOOK_MESSAGE);
+        String message = bookService.returnBook(bookId, CUSTOMER_ID);
+        interactionHelper.promptMessage(message);
     }
 }

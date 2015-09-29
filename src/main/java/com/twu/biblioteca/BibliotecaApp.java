@@ -9,9 +9,8 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         InteractionHelper interactionHelper = new InteractionHelper();
-        BookRepo bookRepo = new BookRepo();
-        BookService bookService = new BookService(bookRepo);
-        LibraryService libraryService = new LibraryService(bookService, bookRepo, interactionHelper);
+        BookService bookService = new BookService(new BookRepo());
+        LibraryService libraryService = new LibraryService(bookService, interactionHelper);
         libraryService.launch();
     }
 }
