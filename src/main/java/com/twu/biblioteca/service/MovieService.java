@@ -44,4 +44,14 @@ public class MovieService {
         }
         return FAILURE_CHECKOUT_MOVIE_MESSAGE;
     }
+
+    public String returnMovie(String movieId, String userId) {
+        Boolean isCanReturnBook = movieRepo.isMovieExist(movieId)
+            && movieRepo.isMovieCheckedOutForCurrentCustomer(movieId, userId);
+        if (isCanReturnBook) {
+            movieRepo.removeCheckedOutMovie(movieId);
+            return SUCCESS_RETURN_MOVIE_MESSAGE;
+        }
+        return FAILURE_RETURN_MOVIE_MESSAGE;
+    }
 }
