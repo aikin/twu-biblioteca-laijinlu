@@ -62,7 +62,7 @@ public class LibraryService {
     }
 
     private void checkoutBook() {
-        interactionHelper.showBooksCanCheckout(bookService.fetchBooksCanCheckout());
+        showBooks();
         String bookId = interactionHelper.readUserInputWithPrompt("\nplease input book id: ");
         String message = bookService.checkoutBook(bookId, USER_ID);
         interactionHelper.promptMessage(message);

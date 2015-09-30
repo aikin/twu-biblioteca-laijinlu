@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class LibraryServiceTest extends TestFixtures {
 
@@ -20,7 +20,6 @@ public class LibraryServiceTest extends TestFixtures {
 
         interactionHelper = mock(InteractionHelper.class);
         bookService = mock(BookService.class);
-
         libraryService = new LibraryService(bookService, interactionHelper);
     }
 
@@ -32,9 +31,13 @@ public class LibraryServiceTest extends TestFixtures {
     }
 
     @Test
-    public void should_test_launch() {
+    public void should_test_choose_quit_option() {
+        when(interactionHelper.getChooseOption()).thenReturn(4);
         libraryService.launch();
 
-        
+        verify(interactionHelper, times(1)).promptMessage(WELCOME_MESSAGE);
+        verify(interactionHelper, times(1)).showMenu();
+        verify(interactionHelper, times(1)).getChooseOption();
+        verify(interactionHelper, times(1)).promptMessage(QUIT_MESSAGE);
     }
 }
