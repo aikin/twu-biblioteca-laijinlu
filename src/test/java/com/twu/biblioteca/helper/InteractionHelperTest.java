@@ -54,7 +54,12 @@ public class InteractionHelperTest {
             "       1 - List books\n" +
                 "       2 - Checkout a book\n" +
                 "       3 - Return a book\n" +
-                "       4 - Quit";
+                "       4 - List movies\n" +
+                "       5 - Checkout a movie\n" +
+                "       6 - Return a movie\n" +
+                "       7 - Profile\n" +
+                "       8 - Quit";
+
         interactionHelper.showMenu();
 
         assertThat(outContent.toString(), is(expectedOutContent + "\n"));

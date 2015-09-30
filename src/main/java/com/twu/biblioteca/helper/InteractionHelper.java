@@ -2,6 +2,7 @@ package com.twu.biblioteca.helper;
 
 
 import com.twu.biblioteca.domain.model.Book;
+import com.twu.biblioteca.domain.model.Movie;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +21,11 @@ public class InteractionHelper {
         out.println("       1 - List books\n" +
                     "       2 - Checkout a book\n" +
                     "       3 - Return a book\n" +
-                    "       4 - Quit");
+                    "       4 - List movies\n" +
+                    "       5 - Checkout a movie\n" +
+                    "       6 - Return a movie\n" +
+                    "       7 - Profile\n" +
+                    "       8 - Quit");
     }
 
     public int getChooseOption() {
@@ -51,6 +56,13 @@ public class InteractionHelper {
         promptMessage(Book.generateColumnHeader());
         for (Book book : books) {
             promptMessage(book.toString());
+        }
+    }
+
+    public void showMoviesCanCheckout(List<Movie> movies) {
+        promptMessage(Movie.generateColumnHeader());
+        for (Movie movie : movies) {
+            promptMessage(movie.toString());
         }
     }
 }

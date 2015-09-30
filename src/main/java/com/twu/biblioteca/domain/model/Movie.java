@@ -1,6 +1,7 @@
 package com.twu.biblioteca.domain.model;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Movie implements Comparable<Movie> {
@@ -62,5 +63,15 @@ public class Movie implements Comparable<Movie> {
     @Override
     public int compareTo(Movie movie) {
         return this.getId().compareTo(movie.getId());
+    }
+
+    public static String generateColumnHeader() {
+        return "ID         Name         Director     Year     Rating";
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        return id + ",   " + name + ",  " + director + ",  " +  formatter.format(year) + ",  " + rating + "    ";
     }
 }
