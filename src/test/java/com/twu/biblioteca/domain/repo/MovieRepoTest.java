@@ -1,6 +1,7 @@
 package com.twu.biblioteca.domain.repo;
 
 import com.twu.biblioteca.domain.model.Movie;
+import com.twu.biblioteca.domain.util.TestFixtures;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +12,10 @@ import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-public class MovieRepoTest {
+public class MovieRepoTest extends TestFixtures {
 
     private MovieRepo movieRepo;
 
@@ -45,5 +48,46 @@ public class MovieRepoTest {
         assertThat(movies.get("M-04").getDirector(), is("Christopher Nolan"));
         assertThat(movies.get("M-04").getYear(), is(formatter.parse("2008")));
         assertThat(movies.get("M-04").getRating(), is("unrated"));
+    }
+
+    @Test
+    public void should_judge_correct_when_call_is_movie_exist() {
+        assertTrue(movieRepo.isMovieExist("M-02"));
+        assertFalse(movieRepo.isMovieExist("M-08"));
+    }
+
+    @Test
+    public void should_get_empty_checked_out_books() {
+        assertThat(movieRepo.getCheckedOutMovies().size(), is(0));
+    }
+
+    @Test
+    public void should_get_correct_checked_out_books_after_add() {
+        movieRepo.addCheckedOutMovie("M-01", USER_ID);
+
+        assertThat(movieRepo.getCheckedOutMovies().size(), is(1));
+        assertThat(movieRepo.getCheckedOutMovies().get("M-01"), is(USER_ID));
+    }
+
+    @Test
+    public void should_judge_correct_when_call_is_book_checked_out() {
+        assertFalse(movieRepo.isMovieCheckedOut("M-01"));
+
+        movieRepo.addCheckedOutMovie("M-01", USER_ID);
+
+        assertTrue(movieRepo.isMovieCheckedOut("M-01"));
+        assertFalse(movieRepo.isMovieCheckedOutForCurrentCustomer("M-01", "no checkedOut user"));
+    }
+
+    @Test
+    public void should_can_remove_checked_out_book() {
+
+        movieRepo.addCheckedOutMovie("M-01", USER_ID);
+
+        assertTrue(movieRepo.isMovieCheckedOut("M-01"));
+
+        movieRepo.removeCheckedOutMovie("M-01");
+
+        assertFalse(movieRepo.isMovieCheckedOut("M-01"));
     }
 }

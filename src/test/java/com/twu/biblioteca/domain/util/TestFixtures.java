@@ -3,7 +3,7 @@ package com.twu.biblioteca.domain.util;
 
 public class TestFixtures {
 
-    public static final String CUSTOMER_ID = "C-01";
+    public static final String USER_ID = "C00-0001";
     public static final String SUCCESS_CHECKOUT_BOOK_MESSAGE = "Thank you! Enjoy the book.";
     public static final String FAILURE_CHECKOUT_BOOK_MESSAGE = "That book is not available.";
     public static final String SUCCESS_RETURN_BOOK_MESSAGE = "Thank you for returning the book.";

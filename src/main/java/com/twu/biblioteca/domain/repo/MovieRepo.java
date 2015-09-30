@@ -11,13 +11,10 @@ import java.util.Map;
 public class MovieRepo {
 
     private final Map<String, Movie> originalMovies = new HashMap<>();
+    private final Map<String, String> checkedOutMovies = new HashMap<>();
 
     public MovieRepo() {
         this.initMovies();
-    }
-
-    public Map<String, Movie> getOriginalMovies() {
-        return originalMovies;
     }
 
     private void initMovies() {
@@ -32,5 +29,33 @@ public class MovieRepo {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public Map<String, Movie> getOriginalMovies() {
+        return originalMovies;
+    }
+
+    public boolean isMovieExist(String movieId) {
+        return originalMovies.containsKey(movieId);
+    }
+
+    public Map<String, String> getCheckedOutMovies() {
+        return checkedOutMovies;
+    }
+
+    public void addCheckedOutMovie(String movieId, String userId) {
+        checkedOutMovies.put(movieId, userId);
+    }
+
+    public boolean isMovieCheckedOut(String movieId) {
+        return checkedOutMovies.containsKey(movieId);
+    }
+
+    public boolean isMovieCheckedOutForCurrentCustomer(String movieId, String userId) {
+        return checkedOutMovies.get(movieId) != null && checkedOutMovies.get(movieId).equals(userId);
+    }
+
+    public void removeCheckedOutMovie(String movieId) {
+        checkedOutMovies.remove(movieId);
     }
 }

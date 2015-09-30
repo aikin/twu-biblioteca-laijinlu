@@ -86,7 +86,7 @@ public class LibraryServiceTest extends TestFixtures {
 
     @Test
     public void should_checkout_book_failure_when_book_is_exist_in_checked_out_books() {
-        bookRepo.addCheckedOutBook("B-03", CUSTOMER_ID);
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
         libraryService.checkoutBook("B-03");
 
@@ -99,8 +99,8 @@ public class LibraryServiceTest extends TestFixtures {
 
     @Test
     public void should_return_book_success_when_book_is_can_be_return() {
-        bookRepo.addCheckedOutBook("B-03", CUSTOMER_ID);
-        bookRepo.addCheckedOutBook("B-04", CUSTOMER_ID);
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
+        bookRepo.addCheckedOutBook("B-04", USER_ID);
         libraryService.returnBook("B-03");
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
@@ -113,7 +113,7 @@ public class LibraryServiceTest extends TestFixtures {
     @Test
     public void should_return_book_success_when_book_is_checked_out_by_current_customer() {
         bookRepo.addCheckedOutBook("B-03", "C-02");
-        bookRepo.addCheckedOutBook("B-04", CUSTOMER_ID);
+        bookRepo.addCheckedOutBook("B-04", USER_ID);
         libraryService.returnBook("B-04");
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
@@ -126,7 +126,7 @@ public class LibraryServiceTest extends TestFixtures {
     @Test
     public void should_return_book_failure_when_book_is_not_checked_out_by_current_customer() {
         bookRepo.addCheckedOutBook("B-03", "C-02");
-        bookRepo.addCheckedOutBook("B-04", CUSTOMER_ID);
+        bookRepo.addCheckedOutBook("B-04", USER_ID);
         libraryService.returnBook("B-03");
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
@@ -140,7 +140,7 @@ public class LibraryServiceTest extends TestFixtures {
 
     @Test
     public void should_return_book_failure_when_book_is_not_exist() {
-        bookRepo.addCheckedOutBook("B-03", CUSTOMER_ID);
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
         libraryService.returnBook("B-08");
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 
@@ -152,7 +152,7 @@ public class LibraryServiceTest extends TestFixtures {
 
     @Test
     public void should_return_book_failure_when_book_is_not_checked_out() {
-        bookRepo.addCheckedOutBook("B-03", CUSTOMER_ID);
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
         libraryService.returnBook("B-04");
         List<Book> booksCanCheckout = libraryService.fetchBooksCanCheckout();
 

@@ -45,7 +45,6 @@ public class BookRepo {
         this.checkedOutBooks.remove(bookId);
     }
 
-
     public boolean isBookCheckedOutForCurrentCustomer(String bookId, String customerId) {
         return this.checkedOutBooks.get(bookId) != null && this.checkedOutBooks.get(bookId).equals(customerId);
     }

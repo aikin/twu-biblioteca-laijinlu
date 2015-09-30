@@ -48,7 +48,7 @@ public class BookServiceTest extends TestFixtures {
 
     @Test
     public void should_checkout_book_success_when_book_is_can_be_checked_out() {
-        String message = bookService.checkoutBook("B-03", "C-01");
+        String message = bookService.checkoutBook("B-03", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
@@ -59,7 +59,7 @@ public class BookServiceTest extends TestFixtures {
 
     @Test
     public void should_checkout_book_failure_when_book_is_not_exist() {
-        String message = bookService.checkoutBook("nonexistence", "C-01");
+        String message = bookService.checkoutBook("nonexistence", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(6));
@@ -70,9 +70,9 @@ public class BookServiceTest extends TestFixtures {
 
     @Test
     public void should_checkout_book_failure_when_book_is_exist_in_checked_out_books() {
-        bookRepo.addCheckedOutBook("B-03", "C-01");
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
-        String message = bookService.checkoutBook("B-03", "C-01");
+        String message = bookService.checkoutBook("B-03", USER_ID);
 
         assertThat(booksCanCheckout.size(), is(5));
         assertThat(booksCanCheckout.get(2).getId(), is("B-04"));
@@ -83,9 +83,9 @@ public class BookServiceTest extends TestFixtures {
 
     @Test
     public void should_return_book_success_when_book_is_can_be_return() {
-        bookRepo.addCheckedOutBook("B-03", "C-01");
-        bookRepo.addCheckedOutBook("B-04", "C-01");
-        String message = bookService.returnBook("B-03", "C-01");
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
+        bookRepo.addCheckedOutBook("B-04", USER_ID);
+        String message = bookService.returnBook("B-03", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
@@ -97,8 +97,8 @@ public class BookServiceTest extends TestFixtures {
     @Test
     public void should_return_book_success_when_book_is_checked_out_by_current_customer() {
         bookRepo.addCheckedOutBook("B-03", "C-02");
-        bookRepo.addCheckedOutBook("B-04", "C-01");
-        String message = bookService.returnBook("B-04", "C-01");
+        bookRepo.addCheckedOutBook("B-04", USER_ID);
+        String message = bookService.returnBook("B-04", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
@@ -110,8 +110,8 @@ public class BookServiceTest extends TestFixtures {
     @Test
     public void should_return_book_failure_when_book_is_not_checked_out_by_current_customer() {
         bookRepo.addCheckedOutBook("B-03", "C-02");
-        bookRepo.addCheckedOutBook("B-04", "C-01");
-        String message = bookService.returnBook("B-03", "C-01");
+        bookRepo.addCheckedOutBook("B-04", USER_ID);
+        String message = bookService.returnBook("B-03", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(4));
@@ -124,8 +124,8 @@ public class BookServiceTest extends TestFixtures {
 
     @Test
     public void should_return_book_failure_when_book_is_not_exist() {
-        bookRepo.addCheckedOutBook("B-03", "C-01");
-        String message = bookService.returnBook("B-08", "C-01");
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
+        String message = bookService.returnBook("B-08", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));
@@ -136,8 +136,8 @@ public class BookServiceTest extends TestFixtures {
 
     @Test
     public void should_return_book_failure_when_book_is_not_checked_out() {
-        bookRepo.addCheckedOutBook("B-03", "C-01");
-        String message = bookService.returnBook("B-04", "C-01");
+        bookRepo.addCheckedOutBook("B-03", USER_ID);
+        String message = bookService.returnBook("B-04", USER_ID);
         List<Book> booksCanCheckout = bookService.fetchBooksCanCheckout();
 
         assertThat(booksCanCheckout.size(), is(5));

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LibraryService {
 
-    private static final String CUSTOMER_ID = "C-01";
+    private static final String USER_ID = "C00-0001";
     private static final String WELCOME_MESSAGE = "\n----------------Welcome to Biblioteca!----------------\n";
     private static final String QUIT_MESSAGE = "\n----------------Thank you for use the Biblioteca!----------------\n";
     private static final String INVALID_MENU_OPTION = "Select a valid option!";
@@ -74,12 +74,12 @@ public class LibraryService {
     }
 
     public void checkoutBook(String bookId) {
-        String message = bookService.checkoutBook(bookId, CUSTOMER_ID);
+        String message = bookService.checkoutBook(bookId, USER_ID);
         interactionHelper.promptMessage(message);
     }
 
     public void returnBook(String bookId) {
-        String message = bookService.returnBook(bookId, CUSTOMER_ID);
+        String message = bookService.returnBook(bookId, USER_ID);
         interactionHelper.promptMessage(message);
     }
 }
