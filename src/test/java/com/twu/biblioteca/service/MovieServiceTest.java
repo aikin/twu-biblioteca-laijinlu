@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class MovieServiceTest extends TestFixtures {
 
@@ -44,5 +45,16 @@ public class MovieServiceTest extends TestFixtures {
         assertThat(moviesCanCheckout.get(0).getDirector(), is("Frank Darabont"));
         assertThat(moviesCanCheckout.get(0).getYear(), is(formatter.parse("1994")));
         assertThat(moviesCanCheckout.get(0).getRating(), is("10"));
+    }
+
+    @Test
+    public void should_checkout_book_success_when_book_is_can_be_checked_out() {
+        String message = movieService.checkoutMovie("M-03", USER_ID);
+        List<Movie> moviesCanCheckout = movieService.fetchMoviesCanCheckout();
+
+        assertThat(moviesCanCheckout.size(), is(5));
+        assertThat(moviesCanCheckout.get(2).getId(), is("M-04"));
+        assertThat(message, is(SUCCESS_CHECKOUT_MOVIE_MESSAGE));
+        assertTrue(movieRepo.getCheckedOutMovies().containsKey("M-03"));
     }
 }
