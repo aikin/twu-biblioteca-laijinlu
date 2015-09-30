@@ -57,12 +57,12 @@ public class MovieRepoTest extends TestFixtures {
     }
 
     @Test
-    public void should_get_empty_checked_out_books() {
+    public void should_get_empty_checked_out_movies() {
         assertThat(movieRepo.getCheckedOutMovies().size(), is(0));
     }
 
     @Test
-    public void should_get_correct_checked_out_books_after_add() {
+    public void should_get_correct_checked_out_movies_after_add() {
         movieRepo.addCheckedOutMovie("M-01", USER_ID);
 
         assertThat(movieRepo.getCheckedOutMovies().size(), is(1));
@@ -70,7 +70,7 @@ public class MovieRepoTest extends TestFixtures {
     }
 
     @Test
-    public void should_judge_correct_when_call_is_book_checked_out() {
+    public void should_judge_correct_when_call_is_movie_checked_out() {
         assertFalse(movieRepo.isMovieCheckedOut("M-01"));
 
         movieRepo.addCheckedOutMovie("M-01", USER_ID);
@@ -80,7 +80,7 @@ public class MovieRepoTest extends TestFixtures {
     }
 
     @Test
-    public void should_can_remove_checked_out_book() {
+    public void should_can_remove_checked_out_movie() {
 
         movieRepo.addCheckedOutMovie("M-01", USER_ID);
 

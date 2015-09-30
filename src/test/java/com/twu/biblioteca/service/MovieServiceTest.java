@@ -36,7 +36,7 @@ public class MovieServiceTest extends TestFixtures {
     }
 
     @Test
-    public void should_fetch_list_of_books_when_checked_out_books_is_empty() throws ParseException {
+    public void should_fetch_list_of_movies_when_checked_out_movies_is_empty() throws ParseException {
         List<Movie> moviesCanCheckout = movieService.fetchMoviesCanCheckout();
 
         assertThat(moviesCanCheckout.size(), is(6));
@@ -48,7 +48,7 @@ public class MovieServiceTest extends TestFixtures {
     }
 
     @Test
-    public void should_checkout_book_success_when_book_is_can_be_checked_out() {
+    public void should_checkout_movie_success_when_movie_is_can_be_checked_out() {
         String message = movieService.checkoutMovie("M-03", USER_ID);
         List<Movie> moviesCanCheckout = movieService.fetchMoviesCanCheckout();
 
