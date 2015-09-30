@@ -32,18 +32,18 @@ public class MovieRepoTest {
 
     @Test
     public void should_can_get_list_of_movies() throws ParseException {
-        Map<String, Movie> listOfBooks = movieRepo.getOriginalMovies();
+        Map<String, Movie> movies = movieRepo.getOriginalMovies();
 
-        assertThat(listOfBooks.size(), is(6));
-        assertThat(listOfBooks.get("M-01").getId(), is("M-01"));
-        assertThat(listOfBooks.get("M-01").getName(), is("Refactoring"));
-        assertThat(listOfBooks.get("M-01").getDirector(), is("Martin Fowler & Kent Beck"));
-        assertThat(listOfBooks.get("M-01").getYear(), is(formatter.parse("1999-07-08")));
-        assertThat(listOfBooks.get("M-01").getRating(), is("10"));
-        assertThat(listOfBooks.get("M-04").getId(), is("M-04"));
-        assertThat(listOfBooks.get("M-04").getName(), is("The Art of Readable Code"));
-        assertThat(listOfBooks.get("M-04").getDirector(), is("Dustin Boswell & Trevor Foucher"));
-        assertThat(listOfBooks.get("M-04").getYear(), is(formatter.parse("2011-12-02")));
-        assertThat(listOfBooks.get("M-01").getRating(), is("unrated"));
+        assertThat(movies.size(), is(6));
+        assertThat(movies.get("M-01").getId(), is("M-01"));
+        assertThat(movies.get("M-01").getName(), is("The Shawshank Redemption"));
+        assertThat(movies.get("M-01").getDirector(), is("Frank Darabont"));
+        assertThat(movies.get("M-01").getYear(), is(formatter.parse("1994")));
+        assertThat(movies.get("M-01").getRating(), is("10"));
+        assertThat(movies.get("M-04").getId(), is("M-04"));
+        assertThat(movies.get("M-04").getName(), is("The Dark Knight"));
+        assertThat(movies.get("M-04").getDirector(), is("Christopher Nolan"));
+        assertThat(movies.get("M-04").getYear(), is(formatter.parse("2008")));
+        assertThat(movies.get("M-04").getRating(), is("unrated"));
     }
 }
