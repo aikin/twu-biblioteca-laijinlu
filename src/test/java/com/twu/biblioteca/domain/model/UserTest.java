@@ -44,4 +44,9 @@ public class UserTest {
         assertThat(user.getPhone(), is("18282828283"));
         assertThat(user.getRole(), is("CUSTOMER"));
     }
+
+    @Test
+    public void should_get_correct_result_when_call_toString() {
+        assertThat(user.toString(), is("{name='customer', email='me@customer.com', phone='18282828282'}"));
+    }
 }
