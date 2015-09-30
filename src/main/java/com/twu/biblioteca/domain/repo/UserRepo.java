@@ -23,8 +23,8 @@ public class UserRepo {
     }
 
     private void initUsers() {
-        users.put("C00-0001", new User("C000-0001", "twu46", "aikin", "aikin@biblioteca.com", "18282828562", "CUSTOMER"));
-        users.put("C00-0002", new User("C000-0002", "twu46", "admin", "admin@biblioteca.com", "18282828563", "LIBRARIAN"));
-        users.put("C00-0003", new User("C000-0003", "twu46", "luajin", "luajin@biblioteca.com", "18282828564", "CUSTOMER"));
+        users.put("C00-0001", new User("C00-0001", "twu46", "aikin", "aikin@biblioteca.com", "18282828562", "CUSTOMER"));
+        users.put("C00-0002", new User("C00-0002", "twu46", "admin", "admin@biblioteca.com", "18282828563", "LIBRARIAN"));
+        users.put("C00-0003", new User("C00-0003", "twu46", "luajin", "luajin@biblioteca.com", "18282828564", "CUSTOMER"));
     }
 }

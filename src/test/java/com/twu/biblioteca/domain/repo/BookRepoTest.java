@@ -28,7 +28,7 @@ public class BookRepoTest {
     }
 
     @After
-    public  void tearDown() {
+    public void tearDown() {
         bookRepo = null;
         formatter = null;
     }

@@ -67,8 +67,8 @@ public class InteractionHelperTest {
         books.add(new Book("B-01", "Refactoring", "Martin Fowler & Kent Beck", formatter.parse("1999-07-08")));
         books.add(new Book("B-02", "Clean Code", "Robert C. Martin", formatter.parse("2008-08-11")));
         String expectedOutContent = "ID         Title         Author     Published Year\n" +
-                                    "B-01,   Refactoring,  Martin Fowler & Kent Beck,  1999-07-08    \n" +
-                                    "B-02,   Clean Code,  Robert C. Martin,  2008-08-11    \n";
+            "B-01,   Refactoring,  Martin Fowler & Kent Beck,  1999-07-08    \n" +
+            "B-02,   Clean Code,  Robert C. Martin,  2008-08-11    \n";
         interactionHelper.showBooksCanCheckout(books);
 
         assertThat(outContent.toString(), is(expectedOutContent));

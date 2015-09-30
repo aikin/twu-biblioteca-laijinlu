@@ -28,7 +28,7 @@ public class MovieRepoTest extends TestFixtures {
     }
 
     @After
-    public  void tearDown() {
+    public void tearDown() {
         movieRepo = null;
         formatter = null;
     }
