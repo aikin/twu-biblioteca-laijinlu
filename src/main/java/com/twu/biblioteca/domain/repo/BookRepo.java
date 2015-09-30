@@ -52,6 +52,7 @@ public class BookRepo {
     private void initBooks() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
+            // TODO: must init books by parse file
             this.originalBooks.put("B-01", new Book("B-01", "Refactoring", "Martin Fowler & Kent Beck", formatter.parse("1999-07-08")));
             this.originalBooks.put("B-02", new Book("B-02", "Clean Code", "Robert C. Martin", formatter.parse("2008-08-11")));
             this.originalBooks.put("B-03", new Book("B-03", "Test Driven Development: By Example", "Kent Beck", formatter.parse("2002-11-18")));

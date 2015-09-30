@@ -19,6 +19,7 @@ public class MovieRepo {
 
     private void initMovies() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        // TODO: must init movies by parse file
         try {
             originalMovies.put("M-01", new Movie("M-01", "The Shawshank Redemption", "Frank Darabont", formatter.parse("1994"), "10"));
             originalMovies.put("M-02", new Movie("M-02", "The Godfather", "Francis Ford Coppola", formatter.parse("1972"), "9"));
