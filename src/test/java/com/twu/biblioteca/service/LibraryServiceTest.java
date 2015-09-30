@@ -2,8 +2,8 @@ package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.domain.model.Book;
 import com.twu.biblioteca.domain.repo.BookRepo;
-import com.twu.biblioteca.domain.util.TestFixtures;
 import com.twu.biblioteca.helper.InteractionHelper;
+import com.twu.biblioteca.util.TestFixtures;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

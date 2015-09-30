@@ -1,7 +1,7 @@
 package com.twu.biblioteca.domain.repo;
 
 import com.twu.biblioteca.domain.model.Movie;
-import com.twu.biblioteca.domain.util.TestFixtures;
+import com.twu.biblioteca.util.TestFixtures;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

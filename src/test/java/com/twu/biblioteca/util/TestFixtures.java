@@ -1,4 +1,4 @@
-package com.twu.biblioteca.domain.util;
+package com.twu.biblioteca.util;
 
 
 public class TestFixtures {
