@@ -23,7 +23,7 @@ public class UserTest {
 
     @Test
     public void should_create_correct_user_instance() {
-        assertThat(user.getId(), is("C00-0001"));
+        assertThat(user.getLibraryNumber(), is("C00-0001"));
         assertThat(user.getName(), is("customer"));
         assertThat(user.getPassword(), is("twu46"));
         assertThat(user.getEmail(), is("me@customer.com"));
@@ -37,7 +37,7 @@ public class UserTest {
         user.setEmail("me1@customer.com");
         user.setPhone("18282828283");
 
-        assertThat(user.getId(), is("C00-0001"));
+        assertThat(user.getLibraryNumber(), is("C00-0001"));
         assertThat(user.getName(), is("customer1"));
         assertThat(user.getPassword(), is("twu46"));
         assertThat(user.getEmail(), is("me1@customer.com"));

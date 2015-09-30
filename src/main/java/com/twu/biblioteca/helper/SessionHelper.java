@@ -6,16 +6,21 @@ import com.twu.biblioteca.domain.repo.UserRepo;
 
 public class SessionHelper {
 
-    private final UserRepo userRepo;
-
-    public SessionHelper(final UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
-
-    public User login(String userId, String password) {
-        if (userRepo.verifyLoginUser(userId, password)) {
-            return userRepo.findUser(userId);
+    public static User login(InteractionHelper interactionHelper, UserRepo userRepo) {
+        User currentUser = null;
+        while (currentUser == null) {
+            String userId = interactionHelper.readUserInputWithPrompt("Please input library number: ");
+            String password = interactionHelper.readUserInputWithPrompt("Please input password: ");
+            if (userRepo.verifyLoginUser(userId, password)) {
+                currentUser = userRepo.findUser(userId);
+            }
+            if (currentUser == null) {
+                interactionHelper.promptMessage("Sorry, maybe the library number or password error!\n");
+            }
         }
-        return null;
+
+        interactionHelper.promptMessage("Login Success!\n");
+        interactionHelper.promptMessage("Profile:" + currentUser.toString());
+        return currentUser;
     }
 }

@@ -3,15 +3,15 @@ package com.twu.biblioteca.domain.model;
 
 public class User {
 
-    private String id;
+    private String libraryNumber;
     private String password;
     private String name;
     private String email;
     private String phone;
     private String role;
 
-    public User(String id, String password, String name, String email, String phone, String role) {
-        this.id = id;
+    public User(String libraryNumber, String password, String name, String email, String phone, String role) {
+        this.libraryNumber = libraryNumber;
         this.password = password;
         this.name = name;
         this.email = email;
@@ -19,12 +19,12 @@ public class User {
         this.role = role;
     }
 
-    public String getId() {
-        return id;
+    public String getLibraryNumber() {
+        return libraryNumber;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setLibraryNumber(String libraryNumber) {
+        this.libraryNumber = libraryNumber;
     }
 
     public String getPassword() {

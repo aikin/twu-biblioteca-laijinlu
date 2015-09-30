@@ -4,6 +4,10 @@ package com.twu.biblioteca.util;
 public class TestFixtures {
 
     public static final String USER_ID = "C00-0001";
+    public static final String WELCOME_MESSAGE = "\n----------------Welcome to Biblioteca!----------------\n";
+    public static final String QUIT_MESSAGE = "\n----------------Thank you for use the Biblioteca!----------------\n";
+    public static final String INVALID_MENU_OPTION = "Select a valid option!";
+    public static final String RELAUNCH_MESSAGE = "\n----------------Press enter to relaunch!----------------";
 
     public static final String SUCCESS_CHECKOUT_BOOK_MESSAGE = "Thank you! Enjoy the book.";
     public static final String FAILURE_CHECKOUT_BOOK_MESSAGE = "That book is not available.";

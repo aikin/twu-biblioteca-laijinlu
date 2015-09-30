@@ -1,9 +1,6 @@
 package com.twu.biblioteca.service;
 
-import com.twu.biblioteca.domain.model.Book;
 import com.twu.biblioteca.helper.InteractionHelper;
-
-import java.util.List;
 
 public class LibraryService {
 
@@ -39,47 +36,50 @@ public class LibraryService {
         interactionHelper.readUserInputWithPrompt(RELAUNCH_MESSAGE);
     }
 
-
     private boolean handleChooseOption(int option) {
         switch (option) {
             case 1:
-                interactionHelper.showBooksCanCheckout(fetchBooksCanCheckout());
+                showBooks();
                 break;
             case 2:
-                interactionHelper.showBooksCanCheckout(fetchBooksCanCheckout());
-                String bookId = interactionHelper.readUserInputWithPrompt("\nplease input book id: ");
-                checkoutBook(bookId);
+                checkoutBook();
                 break;
             case 3:
-                String returnBookId = interactionHelper.readUserInputWithPrompt("\nplease input book id: ");
-                returnBook(returnBookId);
+                returnBook();
                 break;
             case 4:
                 quit();
                 return false;
             default:
-                interactionHelper.promptMessage(INVALID_MENU_OPTION);
-                launch();
+                showValidPrompt();
                 return false;
         }
         return true;
     }
 
-    public void quit() {
-        interactionHelper.promptMessage(QUIT_MESSAGE);
+    private void showBooks() {
+        interactionHelper.showBooksCanCheckout(bookService.fetchBooksCanCheckout());
     }
 
-    public List<Book> fetchBooksCanCheckout() {
-        return bookService.fetchBooksCanCheckout();
-    }
-
-    public void checkoutBook(String bookId) {
+    private void checkoutBook() {
+        interactionHelper.showBooksCanCheckout(bookService.fetchBooksCanCheckout());
+        String bookId = interactionHelper.readUserInputWithPrompt("\nplease input book id: ");
         String message = bookService.checkoutBook(bookId, USER_ID);
         interactionHelper.promptMessage(message);
     }
 
-    public void returnBook(String bookId) {
+    private void returnBook() {
+        String bookId = interactionHelper.readUserInputWithPrompt("\nplease input book id: ");
         String message = bookService.returnBook(bookId, USER_ID);
         interactionHelper.promptMessage(message);
+    }
+
+    private void quit() {
+        interactionHelper.promptMessage(QUIT_MESSAGE);
+    }
+
+    private void showValidPrompt() {
+        interactionHelper.promptMessage(INVALID_MENU_OPTION);
+        launch();
     }
 }
