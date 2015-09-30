@@ -27,7 +27,7 @@ public class MovieTest {
     }
 
     @Test
-    public void should_create_correct_book_instance() {
+    public void should_create_correct_user_instance() {
         assertThat(movie.getId(), is("M-01"));
         assertThat(movie.getName(), is("movie1"));
         assertThat(movie.getDirector(), is("director1"));
